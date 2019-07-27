@@ -47,12 +47,6 @@ nmap <leader>rn <Plug>(coc-rename)
 
 set number relativenumber
 
-" Remap for switching windows
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
-
 " Set the terminal title
 set title
 
@@ -60,3 +54,5 @@ set title
 set tabstop=4
 set shiftwidth=0 " `>` and `<` keys should shift the same distance as tab key
 set noexpandtab " don't expand tabs to spaces
+
+set incsearch
