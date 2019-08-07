@@ -56,3 +56,6 @@ set shiftwidth=0 " `>` and `<` keys should shift the same distance as tab key
 set noexpandtab " don't expand tabs to spaces
 
 set incsearch
+
+" Clear recent search
+nmap <leader><leader> :let @/=""<CR>
