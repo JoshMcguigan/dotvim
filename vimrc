@@ -57,5 +57,5 @@ set noexpandtab " don't expand tabs to spaces
 
 set incsearch
 
-" Clear recent search
-nmap <leader><leader> :let @/=""<CR>
+" Clear search highlighting until next search
+nmap <leader><leader> :nohlsearch<CR>
