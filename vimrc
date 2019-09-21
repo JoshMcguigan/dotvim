@@ -7,16 +7,23 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'rust-lang/rust.vim'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+" Put gitgutter preview (<leader> hp)into floating window
+let g:gitgutter_preview_win_floating = 1
+" Note additional defaults for gitgutter
+" <leader> hu to undo hunk
 
 " Smaller updatetime for CursorHold & CursorHoldI, and git gutter
 set updatetime=100
+
+" Always show column where git gutter puts diagnostics, to avoid jumpiness
+set signcolumn=yes
 
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -44,6 +51,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
+
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
 
 set number relativenumber
 
