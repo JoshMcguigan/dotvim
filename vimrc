@@ -18,6 +18,8 @@ nmap [h <Plug>(GitGutterPrevHunk)
 let g:gitgutter_preview_win_floating = 1
 " Note additional defaults for gitgutter
 " <leader> hu to undo hunk
+" Put gitgutter signs under language server signs
+let g:gitgutter_sign_priority=0
 
 " Smaller updatetime for CursorHold & CursorHoldI, and git gutter
 set updatetime=100
