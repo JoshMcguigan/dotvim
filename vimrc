@@ -26,7 +26,6 @@ nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap <leader>h <Plug>(GitGutterPreviewHunk)
 nmap <leader>u <Plug>(GitGutterUndoHunk)
-nmap <leader>gf :GitGutterFold<CR>
 
 " Smaller updatetime for CursorHold & CursorHoldI, and git gutter
 set updatetime=100
