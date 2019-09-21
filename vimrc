@@ -12,6 +12,9 @@ Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
+" enable comments in json files for jsonc support
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
 " Put gitgutter preview into floating window
 let g:gitgutter_preview_win_floating = 1
 " Put gitgutter signs under language server signs

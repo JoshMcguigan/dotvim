@@ -1,4 +1,5 @@
 *
 !.gitignore
 !vimrc
+!coc-settings.json
 !README.md
