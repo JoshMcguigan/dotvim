@@ -12,14 +12,17 @@ Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
-" Put gitgutter preview (<leader> hp)into floating window
+" Put gitgutter preview into floating window
 let g:gitgutter_preview_win_floating = 1
-" Note additional defaults for gitgutter
-" <leader> hu to undo hunk
 " Put gitgutter signs under language server signs
 let g:gitgutter_sign_priority=0
+" don't use default mappings for gitgutter
+let g:gitgutter_map_keys = 0
+
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+nmap <leader>h <Plug>(GitGutterPreviewHunk)
+nmap <leader>u <Plug>(GitGutterUndoHunk)
 
 " Smaller updatetime for CursorHold & CursorHoldI, and git gutter
 set updatetime=100
