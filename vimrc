@@ -19,6 +19,9 @@ Plug 'ianks/vim-tsx'
 Plug 'leafgarland/typescript-vim'
 call plug#end()
 
+" --- Colors ---
+highlight Pmenu ctermbg=gray
+
 " enable comments in json files for jsonc support
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
