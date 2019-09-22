@@ -6,10 +6,17 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'rust-lang/rust.vim'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+
 Plug 'airblade/vim-gitgutter'
 
+" Rust syntax highlighting
+Plug 'rust-lang/rust.vim'
+
+" tsx syntax highlighting
+Plug 'ianks/vim-tsx'
+" typescript syntax highlighting
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 " enable comments in json files for jsonc support
