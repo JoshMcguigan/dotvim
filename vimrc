@@ -37,6 +37,10 @@ nmap [h <Plug>(GitGutterPrevHunk)
 nmap <leader>h <Plug>(GitGutterPreviewHunk)
 nmap <leader>u <Plug>(GitGutterUndoHunk)
 
+" Allow cursor to move to top and bottom of file
+" And ensure z-t moves line all the way to top of file
+set scrolloff=0
+
 " Smaller updatetime for CursorHold & CursorHoldI, and git gutter
 set updatetime=100
 
