@@ -94,30 +94,23 @@ nmap <leader><leader> :nohlsearch<CR>
 
 " Set the global error format for cargo
 " source: https://github.com/rust-lang/rust.vim/tree/master/compiler
+" This is only a subset of the error formats defined above. The formats
+" which don't map to a file/line were removed to preserve the behavior
+" of :cnext and :cprev.
 " The rust vim plugin sets the compiler errorformat, but there is a bug
-" in vim which causes it to use the global errorformat for `cexpr`.
+" in vim which causes it to use the global errorformat for `cexpr`/'cbuffer'.
 " https://github.com/vim/vim/issues/569
 setglobal errorformat=
-            \%-G,
-            \%-Gerror:\ aborting\ %.%#,
-            \%-Gerror:\ Could\ not\ compile\ %.%#,
-            \%Eerror:\ %m,
-            \%Eerror[E%n]:\ %m,
-            \%Wwarning:\ %m,
-            \%Inote:\ %m,
             \%C\ %#-->\ %f:%l:%c,
             \%E\ \ left:%m,%C\ right:%m\ %f:%l:%c,%Z,
-            \%-G%\\s%#Downloading%.%#,
-            \%-G%\\s%#Compiling%.%#,
-            \%-G%\\s%#Finished%.%#,
-            \%-G%\\s%#error:\ Could\ not\ compile\ %.%#,
-            \%-G%\\s%#To\ learn\ more\\,%.%#,
-            \%-Gnote:\ Run\ with\ \`RUST_BACKTRACE=%.%#,
             \%.%#panicked\ at\ \\'%m\\'\\,\ %f:%l:%c
 
-" adds Watch and NoWatch commands
-" To run cargo test on every buffer write, putting results in quick fix:
-"   Watch cargo test
-"   NoWatch
-command -nargs=1 Watch augroup watch | autocmd BufWritePost * cgetexpr system(<q-args>) | augroup END
-command NoWatch autocmd! watch
+" Load errors from terminal buffer into quickfix list
+" and go to first error. Typically used with a file watcher
+" running in the terminal like `watchexec -c cargo test`,
+" where the `-c` clears the terminal between invocations
+" of `cargo test`.
+nmap <leader>q :execute "cbuffer " . bufnr('!/bin/bash')<CR>
+
+nmap [q :cprev<CR>
+nmap ]q :cnext<CR>
