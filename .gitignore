@@ -1,5 +1,4 @@
-*
-!.gitignore
-!vimrc
-!coc-settings.json
-!README.md
+autoload
+plugged
+view
+.netrwhist

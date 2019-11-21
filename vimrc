@@ -118,7 +118,7 @@ function OpenQuickFix()
 
 	execute "vert botright copen"
 	" Set quickfix width
-	execute &columns * 3/8 . "wincmd |"
+	execute &columns * 1/2 . "wincmd |"
 
     " If focus changed, jump to the last window
     if l:winnr !=# winnr()
