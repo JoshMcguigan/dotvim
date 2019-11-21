@@ -92,6 +92,8 @@ set shiftwidth=0 " `>` and `<` keys should shift the same distance as tab key
 set noexpandtab " don't expand tabs to spaces
 
 set incsearch
+set hlsearch
+set wildmenu
 
 " Clear search highlighting until next search
 nmap <leader><leader> :nohlsearch<CR>
