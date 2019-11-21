@@ -103,10 +103,34 @@ command NoWatch autocmd! watch
 nnoremap <leader>w :Watch 
 nnoremap <leader>nw :NoWatch<CR>
 
-function CloseTerminal()
-	" Closes the terminal if it is open
+function HideTerminal()
+	" Hides the terminal if it is open
+	" Hiding is preferred to closing the terminal so that
+	" the terminal session persists
 	if bufwinnr('bin/bash') > 0
-		execute "bd! " . bufnr('bin/bash')
+		execute bufwinnr('bin/bash') . "hide"
+	endif
+endfunction
+
+function ToggleTerminal()
+	if bufwinnr('bin/bash') > 0
+		call HideTerminal()
+	else
+		if bufnr('bin/bash') > 0
+			" if an existing terminal buffer exists, but was hidden,
+			" it should be re-used
+			execute "vert botright sbuffer " . bufnr('bin/bash')
+		else
+			vert botright term
+		endif
+	endif
+endfunction
+
+function ToggleQuickFix()
+	if len(filter(getwininfo(), 'v:val.quickfix && !v:val.loclist')) > 0
+		cclose
+	else
+		call OpenQuickFix()
 	endif
 endfunction
 
@@ -126,8 +150,8 @@ function OpenQuickFix()
     endif
 endfunction
 
-nnoremap <leader>q :cclose <bar> :call CloseTerminal() <bar> call OpenQuickFix()<CR>
-nnoremap <leader>t :cclose <bar> :call CloseTerminal() <bar> vert botright term<CR>
+nnoremap <leader>t :cclose <bar> :call ToggleTerminal() <CR>
+nnoremap <leader>q :call HideTerminal() <bar> call ToggleQuickFix()<CR>
 
 nnoremap [q :cprev<CR>
 nnoremap ]q :cnext<CR>
