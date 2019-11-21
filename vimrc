@@ -103,9 +103,16 @@ command NoWatch autocmd! watch
 nnoremap <leader>w :Watch 
 nnoremap <leader>nw :NoWatch<CR>
 
-nnoremap <leader>q :vert copen<CR><c-w><c-r><c-w><c-=><c-w>h
-nnoremap <leader>t :cclose <bar> vert term<CR><c-w><c-r>
-" TODO make <leader>q close terminal if it exists
+function CloseTerminal()
+	" Closes the terminal if it is open
+	if bufwinnr('bin/bash') > 0
+		execute "bd! " . bufnr('bin/bash')
+	endif
+endfunction
+
+nnoremap <leader>q :call CloseTerminal() <bar>
+			\vert botright copen<CR><c-w><c-=><c-w>h
+nnoremap <leader>t :cclose <bar> vert botright term<CR>
 
 nnoremap [q :cprev<CR>
 nnoremap ]q :cnext<CR>
