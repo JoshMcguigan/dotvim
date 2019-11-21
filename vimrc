@@ -17,6 +17,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'ianks/vim-tsx'
 " typescript syntax highlighting
 Plug 'leafgarland/typescript-vim'
+
+Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 
 " --- Colors ---
@@ -24,6 +26,8 @@ highlight Pmenu ctermbg=gray
 
 " enable comments in json files for jsonc support
 autocmd FileType json syntax match Comment +\/\/.\+$+
+
+nnoremap <leader>v :source $MYVIMRC<CR>
 
 " Put gitgutter preview into floating window
 let g:gitgutter_preview_win_floating = 1
@@ -92,25 +96,14 @@ set incsearch
 " Clear search highlighting until next search
 nmap <leader><leader> :nohlsearch<CR>
 
-" Set the global error format for cargo
-" source: https://github.com/rust-lang/rust.vim/tree/master/compiler
-" This is only a subset of the error formats defined above. The formats
-" which don't map to a file/line were removed to preserve the behavior
-" of :cnext and :cprev.
-" The rust vim plugin sets the compiler errorformat, but there is a bug
-" in vim which causes it to use the global errorformat for `cexpr`/'cbuffer'.
-" https://github.com/vim/vim/issues/569
-setglobal errorformat=
-            \%C\ %#-->\ %f:%l:%c,
-            \%E\ \ left:%m,%C\ right:%m\ %f:%l:%c,%Z,
-            \%.%#panicked\ at\ \\'%m\\'\\,\ %f:%l:%c
+command -nargs=1 Watch augroup watch | exe "autocmd BufWritePost * AsyncRun <args>" | augroup END
+command NoWatch autocmd! watch
+nnoremap <leader>w :Watch 
+nnoremap <leader>nw :NoWatch<CR>
 
-" Load errors from terminal buffer into quickfix list
-" and go to first error. Typically used with a file watcher
-" running in the terminal like `watchexec -c cargo test`,
-" where the `-c` clears the terminal between invocations
-" of `cargo test`.
-nmap <leader>q :execute "cbuffer " . bufnr('!/bin/bash')<CR>
+nnoremap <leader>q :vert copen<CR><c-w><c-r><c-w><c-=><c-w>h
+nnoremap <leader>t :cclose <bar> vert term<CR><c-w><c-r>
+" TODO make <leader>q close terminal if it exists
 
-nmap [q :cprev<CR>
-nmap ]q :cnext<CR>
+nnoremap [q :cprev<CR>
+nnoremap ]q :cnext<CR>
