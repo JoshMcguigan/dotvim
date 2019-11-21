@@ -110,9 +110,24 @@ function CloseTerminal()
 	endif
 endfunction
 
-nnoremap <leader>q :call CloseTerminal() <bar>
-			\vert botright copen<CR><c-w><c-=><c-w>h
-nnoremap <leader>t :cclose <bar> vert botright term<CR>
+function OpenQuickFix()
+	" Opens the quick fix window vertically split
+	" while maintaining cursor position.
+	" Store the original window number
+    let l:winnr = winnr()
+
+	execute "vert botright copen"
+	" Set quickfix width
+	execute &columns/3 . "wincmd |"
+
+    " If focus changed, jump to the last window
+    if l:winnr !=# winnr()
+        wincmd p
+    endif
+endfunction
+
+nnoremap <leader>q :cclose <bar> :call CloseTerminal() <bar> call OpenQuickFix()<CR>
+nnoremap <leader>t :cclose <bar> :call CloseTerminal() <bar> vert botright term<CR>
 
 nnoremap [q :cprev<CR>
 nnoremap ]q :cnext<CR>
