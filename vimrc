@@ -117,6 +117,15 @@ function HideTerminal()
 	endif
 endfunction
 
+function QuitTerminal()
+	" Force exits the terminal
+	" useful when you want to quit vim without E947
+	" or you just want a fresh terminal session
+	if bufnr('bin/bash') > 0
+		execute "bw! " . bufnr('bin/bash')
+	endif
+endfunction
+
 function ToggleTerminal()
 	if bufwinnr('bin/bash') > 0
 		call HideTerminal()
@@ -166,6 +175,12 @@ endfunction
 
 nnoremap <leader>t :cclose <bar> :call ToggleTerminal() <CR>
 nnoremap <leader>q :call HideTerminal() <bar> call ToggleQuickFix()<CR>
+
+" Toggle terminal hides the terminal buffer rather than removing it, to
+" allowing continuing a session. But this causes E947 when quitting vim
+" if you don't explicitly close the terminal. This remaps :q to first
+" fully exit the terminal to avoid this error.
+cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() == 'q' ? 'call QuitTerminal() \| q' : 'q'
 
 nnoremap [q :cprev<CR>
 nnoremap ]q :cnext<CR>
