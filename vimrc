@@ -105,7 +105,7 @@ let g:asyncrun_local = 1
 
 command -nargs=1 Watch augroup watch | exe "autocmd BufWritePost * <args>" | augroup END
 command NoWatch autocmd! watch
-nnoremap <leader>w :Watch AsyncRun 
+nnoremap <leader>w :Watch AsyncRun -post=call\\ RefreshQuickFix() 
 nnoremap <leader>nw :NoWatch<CR>
 
 function HideTerminal()
@@ -135,6 +135,15 @@ function ToggleQuickFix()
 	if len(filter(getwininfo(), 'v:val.quickfix && !v:val.loclist')) > 0
 		cclose
 	else
+		call OpenQuickFix()
+	endif
+endfunction
+
+function RefreshQuickFix()
+	" Call open quickfix if it is already open
+	" This is used to re-parse errorformat, which helps because
+	" streaming results would otherwise be partially parsed.
+	if len(filter(getwininfo(), 'v:val.quickfix && !v:val.loclist')) > 0
 		call OpenQuickFix()
 	endif
 endfunction
