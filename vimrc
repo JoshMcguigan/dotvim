@@ -98,9 +98,14 @@ set wildmenu
 " Clear search highlighting until next search
 nmap <leader><leader> :nohlsearch<CR>
 
-command -nargs=1 Watch augroup watch | exe "autocmd BufWritePost * AsyncRun <args>" | augroup END
+" Disable python std out buffering when running async
+let $PYTHONUNBUFFERED=1
+" Use local (compiler specific) error format
+let g:asyncrun_local = 1
+
+command -nargs=1 Watch augroup watch | exe "autocmd BufWritePost * <args>" | augroup END
 command NoWatch autocmd! watch
-nnoremap <leader>w :Watch 
+nnoremap <leader>w :Watch AsyncRun 
 nnoremap <leader>nw :NoWatch<CR>
 
 function HideTerminal()
