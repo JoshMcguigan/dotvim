@@ -103,7 +103,7 @@ let $PYTHONUNBUFFERED=1
 " Use local (compiler specific) error format
 let g:asyncrun_local = 1
 
-command -nargs=1 Watch augroup watch | exe "autocmd BufWritePost * <args>" | augroup END
+command -nargs=1 Watch augroup watch | exe "autocmd! BufWritePost * <args>" | augroup END
 command NoWatch autocmd! watch
 nnoremap <leader>w :Watch AsyncRun -post=call\\ RefreshQuickFix() 
 nnoremap <leader>nw :NoWatch<CR>
