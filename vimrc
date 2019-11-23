@@ -79,7 +79,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>f  <Plug>(coc-fix-current)
 
 set number relativenumber
 
@@ -92,7 +92,11 @@ set shiftwidth=0 " `>` and `<` keys should shift the same distance as tab key
 set noexpandtab " don't expand tabs to spaces
 
 set incsearch
+" Turn on search highlighting, the temporarily disable it for the current search
+" This resolves an issue where highlighting is turned on everytime
+" vimrc is sourced
 set hlsearch
+nohlsearch
 set wildmenu
 
 " Clear search highlighting until next search
@@ -107,6 +111,9 @@ command -nargs=1 Watch augroup watch | exe "autocmd! BufWritePost * <args>" | au
 command NoWatch autocmd! watch
 nnoremap <leader>w :Watch AsyncRun -post=call\\ RefreshQuickFix() 
 nnoremap <leader>nw :NoWatch<CR>
+
+nnoremap <leader>a :AsyncRun -post=call\ RefreshQuickFix() 
+nnoremap <leader>s :AsyncStop<CR>
 
 function HideTerminal()
 	" Hides the terminal if it is open
@@ -181,6 +188,7 @@ nnoremap <leader>q :call HideTerminal() <bar> call ToggleQuickFix()<CR>
 " if you don't explicitly close the terminal. This remaps :q to first
 " fully exit the terminal to avoid this error.
 cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() == 'q' ? 'call QuitTerminal() \| q' : 'q'
+cnoreabbrev <expr> qa getcmdtype() == ":" && getcmdline() == 'qa' ? 'call QuitTerminal() \| qa' : 'qa'
 
 nnoremap [q :cprev<CR>
 nnoremap ]q :cnext<CR>
