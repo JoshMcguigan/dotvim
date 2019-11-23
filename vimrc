@@ -104,19 +104,27 @@ nmap <leader><leader> :nohlsearch<CR>
 
 " Disable python std out buffering when running async
 let $PYTHONUNBUFFERED=1
-
 " Set global error format to match estream output
 set errorformat=%f\|%l\|%c,%f\|%l\|,%f\|\|
 " Use global error format with asyncrun
 let g:asyncrun_local = 0
 
+" Pipe any async command through estream to format it as expected
+" by the errorformat setting above
+" example: `:Async cargo test`
+command -nargs=1 Async execute "AsyncRun <args> |& estream"
+nnoremap <leader>a :Async 
+nnoremap <leader>s :AsyncStop<CR>
+
+" Create a file watcher, primarily used with Async using the mapping below
 command -nargs=1 Watch augroup watch | exe "autocmd! BufWritePost * <args>" | augroup END
 command NoWatch autocmd! watch
-nnoremap <leader>w :Watch AsyncRun 
-nnoremap <leader>nw :NoWatch<CR>
 
-nnoremap <leader>a :AsyncRun 
-nnoremap <leader>s :AsyncStop<CR>
+" Use to run a command on every file save, pipe it through estream
+" and view it in the quickfix window.
+" example: `:Watch Async cargo test`
+nnoremap <leader>w :Watch Async 
+nnoremap <leader>nw :NoWatch<CR>
 
 function HideTerminal()
 	" Hides the terminal if it is open
