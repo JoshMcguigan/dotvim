@@ -198,9 +198,8 @@ nnoremap <leader>q :call HideTerminal() <bar> call ToggleQuickFix()<CR>
 
 " Toggle terminal hides the terminal buffer rather than removing it, to
 " allowing continuing a session. But this causes E947 when quitting vim
-" if you don't explicitly close the terminal. This remaps :q to first
+" if you don't explicitly close the terminal. This remaps :qa to first
 " fully exit the terminal to avoid this error.
-cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() == 'q' ? 'call QuitTerminal() \| q' : 'q'
 cnoreabbrev <expr> qa getcmdtype() == ":" && getcmdline() == 'qa' ? 'call QuitTerminal() \| qa' : 'qa'
 
 nnoremap [q :cprev<CR>
