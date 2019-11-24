@@ -19,6 +19,8 @@ Plug 'ianks/vim-tsx'
 Plug 'leafgarland/typescript-vim'
 
 Plug 'skywind3000/asyncrun.vim'
+
+Plug 'JoshMcguigan/estream', { 'do': 'bash install.sh v0.1.1' }
 call plug#end()
 
 " --- Colors ---
@@ -112,7 +114,7 @@ let g:asyncrun_local = 0
 " Pipe any async command through estream to format it as expected
 " by the errorformat setting above
 " example: `:Async cargo test`
-command -nargs=1 Async execute "AsyncRun <args> |& estream"
+command -nargs=1 Async execute "AsyncRun <args> |& $VIM_HOME/plugged/estream/bin/estream"
 nnoremap <leader>a :Async 
 nnoremap <leader>s :AsyncStop<CR>
 
