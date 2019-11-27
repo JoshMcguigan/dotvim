@@ -20,7 +20,7 @@ Plug 'leafgarland/typescript-vim'
 
 Plug 'skywind3000/asyncrun.vim'
 
-Plug 'JoshMcguigan/estream', { 'do': 'bash install.sh v0.1.1' }
+Plug 'JoshMcguigan/estream', { 'do': 'bash install.sh v0.1.2' }
 call plug#end()
 
 " --- Colors ---
