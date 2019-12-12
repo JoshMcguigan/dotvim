@@ -21,6 +21,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'skywind3000/asyncrun.vim'
 
 Plug 'JoshMcguigan/estream', { 'do': 'bash install.sh v0.1.2' }
+
+" Map <c-arrow> to resize splits
+Plug 'breuckelen/vim-resize'
 call plug#end()
 
 " --- Colors ---
@@ -30,6 +33,13 @@ highlight Pmenu ctermbg=gray
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 nnoremap <leader>v :source $MYVIMRC<CR>
+
+" For vim-resize plugin
+let g:resize_count = 1
+tnoremap <silent> <c-left> <C-\><C-N>:CmdResizeLeft<CR>i
+tnoremap <silent> <c-down> <C-\><C-N>:CmdResizeDown<CR>i
+tnoremap <silent> <c-up> <C-\><C-N>:CmdResizeUp<CR>i
+tnoremap <silent> <c-right> <C-\><C-N>:CmdResizeRight<CR>i
 
 " Put gitgutter preview into floating window
 let g:gitgutter_preview_win_floating = 1
