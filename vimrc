@@ -32,6 +32,10 @@ highlight Pmenu ctermbg=gray
 " enable comments in json files for jsonc support
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+" configure yaml
+autocmd BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:>
+
 nnoremap <leader>v :source $MYVIMRC<CR>
 
 " For vim-resize plugin
