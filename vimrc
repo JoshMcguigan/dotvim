@@ -24,6 +24,11 @@ Plug 'JoshMcguigan/estream', { 'do': 'bash install.sh v0.1.2' }
 
 " Map <c-arrow> to resize splits
 Plug 'breuckelen/vim-resize'
+
+" Install fzf cli tool and vim plugin
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 call plug#end()
 
 " --- Colors ---
@@ -207,3 +212,15 @@ nnoremap <leader>q :call HideTerminal() <bar> call ToggleQuickFix()<CR>
 
 nnoremap [q :cprev<CR>
 nnoremap ]q :cnext<CR>
+
+" --- fzf customizations ---
+" enable preview
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" fuzzy find files
+nnoremap <C-p> :Files<CR>
+" fuzzy find in contents of current buffer
+nnoremap <C-l> :BLines<CR>
+" fuzzy find in contents of all files in project
+nnoremap <C-o> :Rg<CR>
