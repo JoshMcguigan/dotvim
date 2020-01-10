@@ -20,7 +20,7 @@ Plug 'leafgarland/typescript-vim'
 
 Plug 'skywind3000/asyncrun.vim'
 
-Plug 'JoshMcguigan/estream', { 'do': 'bash install.sh v0.1.2' }
+Plug 'JoshMcguigan/estream', { 'do': 'bash install.sh v0.2.0' }
 
 " Map <c-arrow> to resize splits
 Plug 'breuckelen/vim-resize'
