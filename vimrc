@@ -217,14 +217,16 @@ nnoremap ]q :cnext<CR>
 " enable preview
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=? -complete=dir GFiles
+    \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 " fuzzy find files
-nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :GFiles<CR>
 " fuzzy find in contents of current buffer
 nnoremap <C-l> :BLines<CR>
 " fuzzy find in contents of all files in project
-nnoremap <C-o> :Rg<CR>
+nnoremap <C-m> :Rg<CR>
