@@ -225,8 +225,8 @@ command! -bang -nargs=* Rg
   \   fzf#vim#with_preview(), <bang>0)
 
 " fuzzy find files
-nnoremap <C-p> :GFiles<CR>
+nnoremap <C-p><C-p> :GFiles<CR>
 " fuzzy find in contents of current buffer
-nnoremap <C-l> :BLines<CR>
+nnoremap <C-p><C-l> :BLines<CR>
 " fuzzy find in contents of all files in project
-nnoremap <C-m> :Rg<CR>
+nnoremap <C-p><C-o> :Rg<CR>
