@@ -213,6 +213,9 @@ nnoremap <leader>q :call HideTerminal() <bar> call ToggleQuickFix()<CR>
 nnoremap [q :cprev<CR>
 nnoremap ]q :cnext<CR>
 
+" default netrw to tree view
+let g:netrw_liststyle = 3
+
 " --- fzf customizations ---
 " enable preview
 command! -bang -nargs=? -complete=dir Files
