@@ -236,3 +236,6 @@ nnoremap <C-p><C-l> :BLines<CR>
 nnoremap <C-p><C-o> :Rg<CR>
 " fuzzy find in previously opened files
 nnoremap <C-p><C-h> :Buffers<CR>
+
+" jump to existing window if possible
+let g:fzf_buffers_jump = 1
