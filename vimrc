@@ -218,24 +218,28 @@ let g:netrw_liststyle = 3
 
 " --- fzf customizations ---
 " enable preview
-command! -bang -nargs=? -complete=dir Files
+command! -bang -nargs=? -complete=dir FilesPreview
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=? -complete=dir GFiles
+command! -bang -nargs=? -complete=dir GFilesPreview
     \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=* Rg
+command! -bang -nargs=* RgPreview
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 " fuzzy find files
 " https://github.com/junegunn/fzf.vim/issues/129
-nnoremap <C-p><C-p> :GFiles --cached --others --exclude-standard<CR>
+nnoremap <C-p><C-p> :GFilesPreview --cached --others --exclude-standard<CR>
 " fuzzy find in contents of current buffer
 nnoremap <C-p><C-l> :BLines<CR>
 " fuzzy find in contents of all files in project
-nnoremap <C-p><C-o> :Rg<CR>
+nnoremap <C-p><C-o> :RgPreview<CR>
 " fuzzy find in previously opened files
 nnoremap <C-p><C-h> :Buffers<CR>
+" fuzzy find in changed (written) files
+" note preview cannot be used here because GFiles? includes the git annotation
+"   for the file, for example modified files are prefixed with M
+nnoremap <C-p><C-w> :GFiles?<CR>
 
 " jump to existing window if possible
 let g:fzf_buffers_jump = 1
