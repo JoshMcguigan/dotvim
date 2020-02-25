@@ -29,6 +29,8 @@ Plug 'breuckelen/vim-resize'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+Plug 'FooSoft/vim-argwrap'
+
 call plug#end()
 
 " --- Colors ---
@@ -122,6 +124,9 @@ set wildmenu
 
 " Clear search highlighting until next search
 nmap <leader><leader> :nohlsearch<CR>
+
+" Turn on trailing comma for :ArgWrap
+let g:argwrap_tail_comma = 1
 
 " Disable python std out buffering when running async
 let $PYTHONUNBUFFERED=1
