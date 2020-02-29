@@ -1,3 +1,5 @@
 {
-	"rust.clippy_preference": "on"
+	"rust-analyzer.cargo-watch.enable": true,
+	"rust-analyzer.cargo-watch.allTargets": true,
+	"rust-analyzer.cargo-watch.command": "clippy"
 }
