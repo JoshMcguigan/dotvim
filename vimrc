@@ -241,10 +241,5 @@ nnoremap <C-p><C-l> :BLines<CR>
 nnoremap <C-p><C-o> :RgPreview<CR>
 " fuzzy find in previously opened files
 nnoremap <C-p><C-h> :Buffers<CR>
-" fuzzy find in changed (written) files
-" note preview cannot be used here because GFiles? includes the git annotation
-"   for the file, for example modified files are prefixed with M
-nnoremap <C-p><C-w> :GFiles?<CR>
-
-" jump to existing window if possible
-let g:fzf_buffers_jump = 1
+" fuzzy find in modified files
+nnoremap <C-p><C-m> :GFiles?<CR>
