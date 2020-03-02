@@ -33,7 +33,14 @@ Plug 'FooSoft/vim-argwrap'
 
 call plug#end()
 
-" --- Colors ---
+" manage coc plugins
+let g:coc_global_extensions = [
+	\ 'coc-rust-analyzer',
+	\ 'coc-json',
+	\ 'coc-python',
+\]
+
+" colors
 highlight Pmenu ctermbg=gray
 
 " enable comments in json files for jsonc support
