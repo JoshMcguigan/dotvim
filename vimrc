@@ -87,7 +87,9 @@ nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gsd :call CocAction('jumpDefinition', 'split')<CR>
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gst :call CocAction('jumpTypeDefinition', 'split')<CR>
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> ga <Plug>(coc-codeaction)
