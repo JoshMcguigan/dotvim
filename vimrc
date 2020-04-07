@@ -10,18 +10,6 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
 Plug 'airblade/vim-gitgutter'
 
-" Rust syntax highlighting
-Plug 'rust-lang/rust.vim'
-
-" tsx syntax highlighting
-Plug 'ianks/vim-tsx'
-" typescript syntax highlighting
-Plug 'leafgarland/typescript-vim'
-
-Plug 'skywind3000/asyncrun.vim'
-
-Plug 'JoshMcguigan/estream', { 'do': 'bash install.sh v0.2.0' }
-
 " Map <c-arrow> to resize splits
 Plug 'breuckelen/vim-resize'
 
@@ -35,6 +23,7 @@ call plug#end()
 
 " manage coc plugins
 let g:coc_global_extensions = [
+	\ 'coc-highlight',
 	\ 'coc-rust-analyzer',
 	\ 'coc-json',
 	\ 'coc-python',
@@ -94,12 +83,6 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> ga <Plug>(coc-codeaction)
 
-" Introduce function text object
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -144,30 +127,6 @@ nmap <leader><leader> :nohlsearch<CR>
 " Turn on trailing comma for :ArgWrap
 let g:argwrap_tail_comma = 1
 
-" Disable python std out buffering when running async
-let $PYTHONUNBUFFERED=1
-" Set global error format to match estream output
-set errorformat=%f\|%l\|%c,%f\|%l\|,%f\|\|
-" Use global error format with asyncrun
-let g:asyncrun_local = 0
-
-" Pipe any async command through estream to format it as expected
-" by the errorformat setting above
-" example: `:Async cargo test`
-command -nargs=1 Async execute "AsyncRun <args> |& $VIM_HOME/plugged/estream/bin/estream"
-nnoremap <leader>a :Async 
-nnoremap <leader>s :AsyncStop<CR>
-
-" Create a file watcher, primarily used with Async using the mapping below
-command -nargs=1 Watch augroup watch | exe "autocmd! BufWritePost * <args>" | augroup END
-command NoWatch autocmd! watch
-
-" Use to run a command on every file save, pipe it through estream
-" and view it in the quickfix window.
-" example: `:Watch Async cargo test`
-nnoremap <leader>w :Watch Async 
-nnoremap <leader>nw :NoWatch<CR>
-
 function HideTerminal()
 	" Hides the terminal if it is open
 	" Hiding is preferred to closing the terminal so that
@@ -195,44 +154,7 @@ function ToggleTerminal()
 	endif
 endfunction
 
-function ToggleQuickFix()
-	if len(filter(getwininfo(), 'v:val.quickfix && !v:val.loclist')) > 0
-		cclose
-	else
-		call OpenQuickFix()
-	endif
-endfunction
-
-function RefreshQuickFix()
-	" Call open quickfix if it is already open
-	" This is used to re-parse errorformat, which helps because
-	" streaming results would otherwise be partially parsed.
-	if len(filter(getwininfo(), 'v:val.quickfix && !v:val.loclist')) > 0
-		call OpenQuickFix()
-	endif
-endfunction
-
-function OpenQuickFix()
-	" Opens the quick fix window vertically split
-	" while maintaining cursor position.
-	" Store the original window number
-    let l:winnr = winnr()
-
-	execute "vert botright copen"
-	" Set quickfix width
-	execute &columns * 1/2 . "wincmd |"
-
-    " If focus changed, jump to the last window
-    if l:winnr !=# winnr()
-        wincmd p
-    endif
-endfunction
-
 nnoremap <leader>t :cclose <bar> :call ToggleTerminal() <CR>
-nnoremap <leader>q :call HideTerminal() <bar> call ToggleQuickFix()<CR>
-
-nnoremap [q :cprev<CR>
-nnoremap ]q :cnext<CR>
 
 " default netrw to tree view
 let g:netrw_liststyle = 3
