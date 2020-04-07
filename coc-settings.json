@@ -1,7 +1,7 @@
 {
-	"rust-analyzer.cargo-watch.enable": true,
-	"rust-analyzer.cargo-watch.allTargets": true,
-	"rust-analyzer.cargo-watch.command": "clippy",
+	"rust-analyzer.checkOnSave.enable": true,
+	"rust-analyzer.checkOnSave.allTargets": true,
+	"rust-analyzer.checkOnSave.command": "clippy",
 	"rust-analyzer.serverPath": "~/.cargo/bin/rust-analyzer",
 	"python.linting.flake8Enabled": true,
 	"python.linting.flake8Args": ["--max-line-length", "119"],
