@@ -156,6 +156,8 @@ endfunction
 
 nnoremap <leader>t :cclose <bar> :call ToggleTerminal() <CR>
 
+nnoremap <leader>e :CocList --normal --auto-preview diagnostics<CR>
+
 " default netrw to tree view
 let g:netrw_liststyle = 3
 
@@ -169,6 +171,19 @@ command! -bang -nargs=* RgPreview
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
+" Show all modified files, either committed and different from master, or not
+" committed. Only committed changes show a preview due to the way git diff
+" with `master...` works. It should be possible to check if the existing `git
+" diff` returns an empty string (unfortunately it returns status code 0 still
+" in this case), and use `git diff master` (without the dots) as a fallback.
+command! -bang -nargs=? ModFiles
+    \ call fzf#run(
+		\fzf#wrap('gdiff', {
+			\'source': '{ git -c color.status=always status --short --untracked-files=all | awk ''{print $2}'' && git diff --name-only master...; } | sort -u',
+			\'options': [
+				\'--preview', 'sh -c "git diff --color=always master... -- {-1} | sed 1,4d | head -500"'],
+		\}, <bang>0)
+	\)
 
 " fuzzy find files
 " https://github.com/junegunn/fzf.vim/issues/129
@@ -180,4 +195,4 @@ nnoremap <C-p><C-o> :RgPreview<CR>
 " fuzzy find in previously opened files
 nnoremap <C-p><C-h> :Buffers<CR>
 " fuzzy find in modified files
-nnoremap <C-p><C-m> :GFiles?<CR>
+nnoremap <C-p><C-m> :ModFiles<CR>
