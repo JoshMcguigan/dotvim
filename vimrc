@@ -158,6 +158,9 @@ nnoremap <leader>t :cclose <bar> :call ToggleTerminal() <CR>
 
 nnoremap <leader>e :CocList --normal --auto-preview diagnostics<CR>
 
+" yank selection into system clipboard
+vnoremap <leader>y :'<,'>w !wl-copy<CR><CR>
+
 " default netrw to tree view
 let g:netrw_liststyle = 3
 
