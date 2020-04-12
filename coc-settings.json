@@ -1,5 +1,4 @@
 {
-	"rust-analyzer.checkOnSave.enable": true,
 	"rust-analyzer.checkOnSave.command": "clippy",
 	"rust-analyzer.serverPath": "~/.cargo/bin/rust-analyzer",
 	"python.linting.flake8Enabled": true,
