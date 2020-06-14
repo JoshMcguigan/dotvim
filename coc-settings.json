@@ -1,5 +1,6 @@
 {
 	"rust-analyzer.serverPath": "~/.cargo/bin/rust-analyzer",
+	"rust-analyzer.cargo.loadOutDirsFromCheck": true,
 	"python.linting.flake8Enabled": true,
 	"python.linting.flake8Args": ["--max-line-length", "119"],
 	"python.linting.flake8Path": "~/.local/bin/flake8",
